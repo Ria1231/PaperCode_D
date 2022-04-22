@@ -16,8 +16,9 @@ export default function UserForm(){
     const [Cardno, setCardno] = useState('');
     const [Mobileno, setMobileno] = useState('');
     const [Gender, setGender] = useState('');
-
-
+    const [disable, setDisable] = useState('');
+    
+    
     //Add Form Data
     const submithandler = (e) => {
         e.preventDefault()
@@ -38,13 +39,12 @@ export default function UserForm(){
                 MobileNo: Mobileno,
                 Gender:Gender
               }
-              dispatch(UpdateUser(userdata));
+            dispatch(UpdateUser(userdata));
              history.push("/UserList");
           }
           else{
-        //   dispatch(getContact(""));
+          dispatch(GetUser(""));
           dispatch(AddUser(userdata));
-          console.log("formdata" + JSON.stringify(userdata));
           history.push("/UserList");
           }
     }
@@ -52,9 +52,8 @@ export default function UserForm(){
     let { id } = useParams();
     
     const getUserSelector = useSelector((state) => state.users.user)
-    console.log("id", id);
 
-    useEffect(() => {
+    useEffect(() => {    
         if (id) {
           dispatch(GetUser(id));
         }
@@ -63,13 +62,14 @@ export default function UserForm(){
       useEffect(() => {
         console.log("getcontactSelector", getUserSelector);
         if (getUserSelector != null) {
-          setCardno(getUserSelector.Cardno)
+          setCardno(getUserSelector.CardNo)
           setName(getUserSelector.Name)
-          setMobileno(getUserSelector.Mobileno)
+          setMobileno(getUserSelector.MobileNumber)
           setGender(getUserSelector.Gender)
     
         }
       }, [getUserSelector]);
+      
     return(
 
         <div className="container-fluid my-5">
@@ -103,8 +103,9 @@ export default function UserForm(){
                         onChange={(e) => setGender(e.target.value)}/>
                     </div>
                     <div className="form-group my-3">
-                    <button type="submit" onClick={submithandler} className="btn btn-primary">ADD</button>
-                    <button type="button" className="btn btn-default">CANCEL</button>
+                    <button type="submit" disabled={disable} onClick={submithandler} className="btn btn-primary">
+                        {id ? "Update User" : "Add User"}
+                    </button>
                     </div>
                 </form>
             </div>

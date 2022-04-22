@@ -6,13 +6,16 @@ import { useDispatch } from "react-redux";
 import { DeleteUser } from "../../redux/Action/UserAction";
 
 
+
 export default function UserList() {
     let history = useHistory();
     const dispatch = useDispatch();
 
     const userSel = useSelector((state) => state.users.users)
     console.log("userSel ", userSel)
-
+    const submithandler = () => {
+        history.push("/addUser");
+      }
 
     return (
         <div className="container">
@@ -39,11 +42,11 @@ export default function UserList() {
                                             <button type="button" 
                                             onClick={() => dispatch(DeleteUser(user.id))}
                                             className="btn btn-danger">Delete</button>
-                                            {/* <Link to={`/edit/${user.id}`}> */}
-                                            <a href={'edit/1'}>
+                                            <Link to={'/edit/'+user.id}>
+                                            {/* <a href={'edit/1'}> */}
                                                 <span>Edit</span>
-                                                </a>
-                                                {/* </Link> */}
+                                                {/* </a> */}
+                                                </Link>
                                         </td>
                                     </tr>
                                 )
@@ -51,6 +54,7 @@ export default function UserList() {
                         }
                     </tbody>
                 </table>
+                <button type="button" onClick={submithandler} className="btn btn-outline-dark btn-sm ">ADD USER</button>
 
             </div>
     )
