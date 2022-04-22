@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { AddUser } from '../../redux/Action/UserAction';
+import { AddUser,UpdateUser,GetUser } from '../../redux/Action/UserAction';
 import { useHistory, useParams } from "react-router-dom";
 import shortid from "shortid";
 
@@ -30,12 +30,46 @@ export default function UserForm(){
             Gender:Gender
           }
 
+          if(id){
+            const userdata = {
+                id: id,
+                CardNo: Cardno,
+                Name: Name,
+                MobileNo: Mobileno,
+                Gender:Gender
+              }
+              dispatch(UpdateUser(userdata));
+             history.push("/UserList");
+          }
+          else{
         //   dispatch(getContact(""));
           dispatch(AddUser(userdata));
           console.log("formdata" + JSON.stringify(userdata));
           history.push("/UserList");
+          }
     }
 
+    let { id } = useParams();
+    
+    const getUserSelector = useSelector((state) => state.users.user)
+    console.log("id", id);
+
+    useEffect(() => {
+        if (id) {
+          dispatch(GetUser(id));
+        }
+      }, [id]);
+    
+      useEffect(() => {
+        console.log("getcontactSelector", getUserSelector);
+        if (getUserSelector != null) {
+          setCardno(getUserSelector.Cardno)
+          setName(getUserSelector.Name)
+          setMobileno(getUserSelector.Mobileno)
+          setGender(getUserSelector.Gender)
+    
+        }
+      }, [getUserSelector]);
     return(
 
         <div className="container-fluid my-5">

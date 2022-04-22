@@ -14,3 +14,21 @@ export const DeleteUser = (userdata) => (
     },
     console.log('deleted')
 );
+
+export const UpdateUser = (userdata) => (
+    console.log("updateUserAction", userdata),
+    {
+        type: "UPDATE_USER",
+        payload: userdata,    
+    },
+    console.log('updated')
+);
+
+export const GetUser = (userdata) => (
+    console.log("getUserAction", userdata),
+    {
+        type: "GET_USER",
+        payload: userdata,
+    
+    }
+);

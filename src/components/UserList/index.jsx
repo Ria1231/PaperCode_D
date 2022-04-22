@@ -39,7 +39,11 @@ export default function UserList() {
                                             <button type="button" 
                                             onClick={() => dispatch(DeleteUser(user.id))}
                                             className="btn btn-danger">Delete</button>
-                                            <button type="button" className="btn btn-default">Edit</button>
+                                            {/* <Link to={`/edit/${user.id}`}> */}
+                                            <a href={'edit/1'}>
+                                                <span>Edit</span>
+                                                </a>
+                                                {/* </Link> */}
                                         </td>
                                     </tr>
                                 )

@@ -2,10 +2,10 @@ const userData = {
     users: [
       {
         id: 1,
-        CardNo: 1242534645,
+        CardNo: 'asdad',
         Name: "Riya",
-        MobileNumber: "4325354354325",
-        Gender: 'Female',
+        MobileNumber: "432535435asd",
+        Gender: 'male',
       },
       {
         id: 2,
@@ -35,6 +35,33 @@ export const UserReducer = (state = userData, action) => {
                 users: state.users.filter(
                   (user) => user.id != action.payload
                 ),
+              };      
+            }
+          case "UPDATE_USER": {
+            console.log(action.payload);
+            return {
+              ...state,
+              users: state.users.map((user) =>
+              user.id == action.payload.id ? action.payload : user
+              ),
+            };
+          }
+          case "GET_USER":
+            {
+              console.log("getconatct", action.payload);
+              let data = state.users.filter(
+                (user) => user.id == action.payload
+              );
+      
+              data = data.values();
+              
+              for (let val of data) {
+                data = val;
+              }
+              console.log("getReducer", data);
+              return {
+                ...state,
+                user: data,
               };
       
             }
