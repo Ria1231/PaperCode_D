@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { DeleteUser } from "../../redux/Action/UserAction";
 
 
 export default function UserList() {
     let history = useHistory();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const userSel = useSelector((state) => state.users.users)
     console.log("userSel ", userSel)
@@ -35,7 +36,9 @@ export default function UserList() {
                                         <td>{user.MobileNumber}</td>
                                         <td>{user.Gender}</td>
                                         <td>
-                                            <button type="button" className="btn btn-danger">Delete</button>
+                                            <button type="button" 
+                                            onClick={() => dispatch(DeleteUser(user.id))}
+                                            className="btn btn-danger">Delete</button>
                                             <button type="button" className="btn btn-default">Edit</button>
                                         </td>
                                     </tr>

@@ -5,3 +5,12 @@ export const AddUser = (userdata) => (
         payload: userdata,
     }
 );
+
+export const DeleteUser = (userdata) => (
+    console.log("DeleteUserAction", userdata),
+    {
+        type: "DELETE_USER",
+        payload: userdata,    
+    },
+    console.log('deleted')
+);
