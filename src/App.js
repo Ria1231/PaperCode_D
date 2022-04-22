@@ -17,7 +17,7 @@ function App() {
           <Switch>            
             <Route path="/addUser" exact component={UserForm} />
             <Route path="/UserList" exact component={UserList}/>
-            {/* <Route path="/edit/:id" exact component={ContactForm}/> */}
+            
           </Switch>
         </BrowserRouter>
         <UserList />
